@@ -98,18 +98,27 @@ function Car(model, milesPerGallon) {
 Car.prototype.fill = function(gallons){
   this.tank += gallons;
 }
-// 
-// Car.prototype.drive = function(distance){
-//   if(this.tank > 0){
-//     this.tank 
-//   }
-//   if(this.tank > 0){
-//     this.odometer += distance;
-//   }
-  
-// }
+ 
+ Car.prototype.drive = function(distance){
+   const range = this.tank * this.milesPerGallon
+   if(distance < range){
+     this.tank -= distance / this.milesPerGallon
+     this.odometer += distance;
+   } else {
+    this.tank = 0;
+    this.odometer += range;
+    return `I ran out of fuel at ${this.odometer} miles!`
+   }
+   return 'drive complete'
+ }
 
-// Car.prototype
+const myCar = new Car('Matrix', 10);
+myCar.fill(10);
+console.log(myCar)
+
+console.log(myCar.drive(60));
+console.log(myCar);
+
 
 /*
   TASK 3
@@ -132,10 +141,10 @@ Baby.prototype.play = function(){
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. by default 'this' refers to the window or global object, undefined in strict mode
+  2. in implicit binding 'this' refers to the object on which the function was called that is the thing to the left of the dot when the function is invoked.
+  3. in explicit binding the keywords 'call' 'bind' or 'apply' explicitly tell what 'this' points to.
+  4. with constuctor functions this points to the new object created using the 'new' keyword with the constructor.
 */
 
 
